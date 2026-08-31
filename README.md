@@ -1,41 +1,52 @@
-# PM₂.₅ Prediction Using Machine Learning and Deep Learning
+# PM₂.₅ Prediction and Environmental Modeling
 
 ## Overview
 
-This repository contains research work related to PM₂.₅ prediction using machine learning and deep learning techniques.
+This repository contains research code for analyzing PM₂.₅ concentrations and their relationships with meteorological variables using statistical modeling, machine learning, and deep learning approaches.
 
-## Research Areas
+The current implementation includes a Distributed Lag Nonlinear Model (DLNM) workflow for investigating nonlinear and delayed associations between temperature and PM₂.₅.
 
-- Air Quality Modeling
-- PM₂.₅ Prediction
-- Machine Learning
-- Deep Learning
-- Time-Series Forecasting
-- Atmospheric Physics
-- Environmental Data Analysis
+## Current Analysis
 
-## Planned Models
+### Distributed Lag Nonlinear Model (DLNM)
 
-- Linear Regression
-- Random Forest
-- XGBoost
-- Prophet
-- LSTM
-- CNN-LSTM
-- Transformer
+The R script `R/dlnm_temperature_pm25.R` performs station-specific DLNM analysis of temperature and PM₂.₅.
 
-## Programming Languages
+The workflow includes:
 
-- Python
-- R
+- Multi-station data processing
+- Data quality checks
+- Temperature cross-basis construction
+- Nonlinear exposure-response modeling
+- Lagged-effect analysis
+- Adjustment for relative humidity, wind speed, and atmospheric pressure
+- Adjustment for day-of-week and temporal trends
+- Station-specific prediction
+- DLNM contour visualization
 
-## Status
+The current analysis considers lag periods from 0 to 15 days.
 
-🚧 This repository is currently under active development. New codes, datasets, notebooks, and research materials will be added regularly.
+## Required Variables
 
-## Author
+The input dataset should contain the following variables:
 
-**Shyam Prasad Kuikel**
+- Date
+- Temperature
+- Relative Humidity
+- Wind Speed
+- Atmospheric Pressure
+- Daily Mean PM₂.₅ Concentration
 
-- LinkedIn: https://linkedin.com/in/shyam-kuikel-10429b41a
-- Google Scholar: https://scholar.google.com/citations?user=mOe4kq4AAAAJ
+## Statistical Framework
+
+Temperature is modeled using a DLNM cross-basis with natural cubic splines for both the exposure and lag dimensions.
+
+PM₂.₅ concentration is treated as a continuous response using a Gaussian generalized linear model. Relative humidity, wind speed, atmospheric pressure, day of week, and temporal trend are included as covariates.
+
+## Repository Structure
+
+```text
+PM25-Prediction/
+├── R/
+│   └── dlnm_temperature_pm25.R
+└── README.md
